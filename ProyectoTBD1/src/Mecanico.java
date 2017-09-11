@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Mecanico extends AsesorMecanico {
     private final ArrayList<Citas> registeredDates;
     
-    public Mecanico(String amName, int amID, int amCompanyPhone) {
+    public Mecanico(String amName, String amID, int amCompanyPhone) {
         super(amName, amID, amCompanyPhone);
         registeredDates = new ArrayList<>();
     }

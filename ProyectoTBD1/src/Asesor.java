@@ -15,7 +15,7 @@ public class Asesor extends AsesorMecanico {
     
     private final ArrayList<Mecanico> assignedGroup;
     
-    public Asesor(String amName, int amID, int amCompanyPhone) {
+    public Asesor(String amName, String amID, int amCompanyPhone) {
         super(amName, amID, amCompanyPhone);
         assignedGroup = new ArrayList<>();
     }

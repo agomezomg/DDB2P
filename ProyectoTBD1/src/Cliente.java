@@ -6,21 +6,21 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author lana
  */
 public class Cliente extends User {
 
-    private int clientID;
+    private String clientID;
     private String clientName;
     private int clientPhoneNumber;
     private String clientAddress;
     private String clientEmail;
-    private ArrayList <Automovil> registeredCars;
-
-    public Cliente(int clientID, String clientName, int clientPhoneNumber, String clientAddress, String clientEmail, String username, String password) {
+    private ArrayList<Automovil> registeredCars;
+    private int citaEstado;
+    
+    public Cliente(String clientID, String clientName, int clientPhoneNumber, String clientAddress, String clientEmail, String username, String password, int citaEstado) {
         super(username, password);
         this.clientID = clientID;
         this.clientName = clientName;
@@ -28,13 +28,11 @@ public class Cliente extends User {
         this.clientAddress = clientAddress;
         this.clientEmail = clientEmail;
         this.registeredCars = new ArrayList<>();
+        this.citaEstado = citaEstado;
     }
 
-    public int getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(int clientID) {
+    public Cliente(String clientID, String username, String password) {
+        super(username, password);
         this.clientID = clientID;
     }
 

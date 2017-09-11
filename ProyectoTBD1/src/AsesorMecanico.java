@@ -11,10 +11,10 @@
 public abstract class AsesorMecanico {
 
     private final String amName;
-    private final int amID;
+    private final String amID;
     private final int amCompanyPhone;
 
-    public AsesorMecanico(String amName, int amID, int amCompanyPhone) {
+    public AsesorMecanico(String amName, String amID, int amCompanyPhone) {
         this.amName = amName;
         this.amID = amID;
         this.amCompanyPhone = amCompanyPhone;
@@ -24,7 +24,7 @@ public abstract class AsesorMecanico {
         return amName;
     }
 
-    public int getAmID() {
+    public String getAmID() {
         return amID;
     }
 
