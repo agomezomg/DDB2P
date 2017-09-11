@@ -11,10 +11,10 @@ import java.util.ArrayList;
  *
  * @author lana
  */
-public class Mecanico extends AsesorMecanico {
-    private final ArrayList<Citas> registeredDates;
+public class Mechanic extends MechanicAssesor {
+    private final ArrayList<Appointment> registeredDates;
     
-    public Mecanico(String amName, String amID, int amCompanyPhone) {
+    public Mechanic(String amName, String amID, int amCompanyPhone) {
         super(amName, amID, amCompanyPhone);
         registeredDates = new ArrayList<>();
     }

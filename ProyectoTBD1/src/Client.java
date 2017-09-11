@@ -10,30 +10,42 @@ import java.util.ArrayList;
  *
  * @author lana
  */
-public class Cliente extends User {
+public class Client extends User {
 
-    private String clientID;
+    private final String clientID;
     private String clientName;
     private int clientPhoneNumber;
     private String clientAddress;
     private String clientEmail;
-    private ArrayList<Automovil> registeredCars;
-    private int citaEstado;
-    
-    public Cliente(String clientID, String clientName, int clientPhoneNumber, String clientAddress, String clientEmail, String username, String password, int citaEstado) {
+    private ArrayList<Automobile> registeredCars;
+    private String appointmentState;
+    private Assesor mainAssesor;
+
+    public Client(String clientID, String clientName, int clientPhoneNumber, String clientAddress, String clientEmail, String citaEstado, Assesor mainAssesor, String username, String password) {
         super(username, password);
         this.clientID = clientID;
         this.clientName = clientName;
         this.clientPhoneNumber = clientPhoneNumber;
         this.clientAddress = clientAddress;
         this.clientEmail = clientEmail;
-        this.registeredCars = new ArrayList<>();
-        this.citaEstado = citaEstado;
+        this.appointmentState = citaEstado;
+        this.mainAssesor = mainAssesor;
     }
 
-    public Cliente(String clientID, String username, String password) {
-        super(username, password);
-        this.clientID = clientID;
+    public String getAppointmentState() {
+        return appointmentState;
+    }
+
+    public void setAppointmentState(String appointmentState) {
+        this.appointmentState = appointmentState;
+    }
+
+    public Assesor getMainAssesor() {
+        return mainAssesor;
+    }
+
+    public void setMainAssesor(Assesor mainAssesor) {
+        this.mainAssesor = mainAssesor;
     }
 
     public String getClientName() {
