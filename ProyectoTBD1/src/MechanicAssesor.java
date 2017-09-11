@@ -8,13 +8,13 @@
  *
  * @author lana
  */
-public abstract class AsesorMecanico {
+public abstract class MechanicAssesor {
 
     private final String amName;
     private final String amID;
     private final int amCompanyPhone;
 
-    public AsesorMecanico(String amName, String amID, int amCompanyPhone) {
+    public MechanicAssesor(String amName, String amID, int amCompanyPhone) {
         this.amName = amName;
         this.amID = amID;
         this.amCompanyPhone = amCompanyPhone;

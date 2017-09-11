@@ -8,13 +8,13 @@
  *
  * @author lana
  */
-public class Automovil {
+public class Automobile {
 
     private String platelet;
     private String model;
     private int motor;
 
-    public Automovil(String platelet, String model, int motor) {
+    public Automobile(String platelet, String model, int motor) {
         this.platelet = platelet;
         this.model = model;
         this.motor = motor;
