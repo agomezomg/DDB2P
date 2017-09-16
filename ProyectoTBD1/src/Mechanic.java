@@ -19,4 +19,9 @@ public class Mechanic extends MechanicAssesor {
         registeredDates = new ArrayList<>();
     }
 
+    public ArrayList<Appointment> getRegisteredDates() {
+        return registeredDates;
+    }
+    
+
 }
