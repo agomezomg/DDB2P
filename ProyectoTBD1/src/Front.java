@@ -1761,6 +1761,7 @@ public class Front extends javax.swing.JFrame {
 
     private void jButton_AddAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddAppointmentActionPerformed
         try {
+            //Appointment Creation
             if (CheckExistingPrimaryKey("cita","IDCita",jText_AppointmentID.getText())==true) {
                 JOptionPane.showMessageDialog(this,"Theres already a Appointment with that ID");
             }else{
@@ -1779,7 +1780,17 @@ public class Front extends javax.swing.JFrame {
                     PreparedQuery.setString(9,"Reparation:"+jComboBox_AppointmentTypeDetails.getSelectedItem().toString());
                 }
                 PreparedQuery.executeUpdate();
-            }        
+            }
+            //Assign Appointments to Mechanics
+            SQLQuery="UPDATE mecanico SET IDCita=? WHERE IDAsesorAsignado='"+jText_AppointmentAssesorID.getText()+"'";
+            PreparedStatement PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
+            PreparedQuery.setString(1,jText_AppointmentID.getText());
+            PreparedQuery.executeUpdate();
+            //Assign Appointment to Client
+            SQLQuery="UPDATE cliente SET IDCita=? WHERE IDCliente='"+jText_AppointmentClientID.getText()+"'";
+            PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
+            PreparedQuery.setString(1,jText_AppointmentID.getText());
+            PreparedQuery.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
         }
