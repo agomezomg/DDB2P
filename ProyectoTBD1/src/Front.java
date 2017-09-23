@@ -1,4 +1,3 @@
-
 import java.awt.Dialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -82,7 +80,7 @@ public class Front extends javax.swing.JFrame {
         jLabel37 = new javax.swing.JLabel();
         jText_ClientSearchID = new javax.swing.JTextField();
         jButton_SearchClient = new javax.swing.JButton();
-        jButton_RefreshClient = new javax.swing.JButton();
+        jButton_SearchClientID = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         prueba = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
@@ -94,9 +92,9 @@ public class Front extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable_AppointmentAssesor = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        jText_ID1 = new javax.swing.JTextField();
+        jText_AppointmentAssesorID = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jText_Name1 = new javax.swing.JTextField();
+        jText_AppointmentAssesorName = new javax.swing.JTextField();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTable_AppointmentAutomobile = new javax.swing.JTable();
         jLabel42 = new javax.swing.JLabel();
@@ -109,17 +107,19 @@ public class Front extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         jText_AppointmentDepartureDate = new javax.swing.JTextField();
         jLabel52 = new javax.swing.JLabel();
-        jText_PhoneNumber1 = new javax.swing.JTextField();
-        jText_ClientViewPlate1 = new javax.swing.JTextField();
+        jText_AppointmentAssesorPhoneNumber = new javax.swing.JTextField();
+        jText_AppointmentPlate = new javax.swing.JTextField();
         jLabel53 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
-        jText_ClientViewModel1 = new javax.swing.JTextField();
-        jText_ClientViewMotor1 = new javax.swing.JTextField();
+        jText_AppointmentModel = new javax.swing.JTextField();
+        jText_AppointmentMotor = new javax.swing.JTextField();
         jLabel55 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox_AppointmentType = new javax.swing.JComboBox<>();
+        jComboBox_AppointmentTypeDetails = new javax.swing.JComboBox<>();
         jButton_AddAppointment = new javax.swing.JButton();
-        jPopupMenuEmployees = new javax.swing.JPopupMenu();
+        jLabel56 = new javax.swing.JLabel();
+        jText_AppointmentID = new javax.swing.JTextField();
+        jPopupMenuAssesor = new javax.swing.JPopupMenu();
         jMenuItem_View = new javax.swing.JMenuItem();
         jMenuItem_DeleteEmployee = new javax.swing.JMenuItem();
         jMenuItem_DetailView = new javax.swing.JMenuItem();
@@ -139,21 +139,7 @@ public class Front extends javax.swing.JFrame {
         jButton_AssignMechanic = new javax.swing.JButton();
         jCombo_AssignMechanics = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jf_Mechanic = new javax.swing.JFrame();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel32 = new javax.swing.JLabel();
-        jText_AssignAssesor = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        jText_MechanicID = new javax.swing.JTextField();
-        jLabel34 = new javax.swing.JLabel();
-        jText_MechanicPhoneNumber = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        jText_MechanicName = new javax.swing.JTextField();
-        jLabel36 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable_AssingAppointments = new javax.swing.JTable();
-        jButton_AssignAppointment = new javax.swing.JButton();
-        jCombo_AssignAppointments = new javax.swing.JComboBox<>();
+        jButton_RefreshAssesor = new javax.swing.JButton();
         jf_Client = new javax.swing.JFrame();
         jButton_AddAutomobile = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -175,11 +161,15 @@ public class Front extends javax.swing.JFrame {
         jText_ClientViewAdress = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
         jText_ClientViewID = new javax.swing.JTextField();
-        jButton_RefreshEmployee2 = new javax.swing.JButton();
+        jButton_RefreshAutomobilesClientView = new javax.swing.JButton();
         jPopupMenuClients = new javax.swing.JPopupMenu();
         jMenuItem_ViewClient = new javax.swing.JMenuItem();
         jMenuItem_DeleteClient = new javax.swing.JMenuItem();
         jMenuItem_DetailViewClient = new javax.swing.JMenuItem();
+        jPopupMenu_AutomobileData = new javax.swing.JPopupMenu();
+        jMenuItem_GetAutomobileData = new javax.swing.JMenuItem();
+        jPopupMenu_AssesorData = new javax.swing.JPopupMenu();
+        jMenuItem_GetAssesorData = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -237,7 +227,7 @@ public class Front extends javax.swing.JFrame {
 
             }
         ));
-        jTable_Employees.setComponentPopupMenu(jPopupMenuEmployees);
+        jTable_Employees.setComponentPopupMenu(jPopupMenuAssesor);
         jScrollPane2.setViewportView(jTable_Employees);
 
         jLabel23.setText("Type:");
@@ -254,12 +244,6 @@ public class Front extends javax.swing.JFrame {
         });
 
         jLabel27.setText("Employee ID to search:");
-
-        jText_EmployeeSearchID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jText_EmployeeSearchIDActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -342,7 +326,7 @@ public class Front extends javax.swing.JFrame {
                     .addComponent(jText_EmployeeSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton_RefreshEmployee)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         jTabbedPane_Appointment.addTab("Employees", jPanel3);
@@ -391,12 +375,6 @@ public class Front extends javax.swing.JFrame {
 
         jLabel37.setText("Client ID to search:");
 
-        jText_ClientSearchID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jText_ClientSearchIDActionPerformed(evt);
-            }
-        });
-
         jButton_SearchClient.setText("Refresh");
         jButton_SearchClient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -404,10 +382,10 @@ public class Front extends javax.swing.JFrame {
             }
         });
 
-        jButton_RefreshClient.setText("Serch");
-        jButton_RefreshClient.addActionListener(new java.awt.event.ActionListener() {
+        jButton_SearchClientID.setText("Search");
+        jButton_SearchClientID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RefreshClientActionPerformed(evt);
+                jButton_SearchClientIDActionPerformed(evt);
             }
         });
 
@@ -462,7 +440,7 @@ public class Front extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jText_ClientSearchID, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton_RefreshClient, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jButton_SearchClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(5, 5, 5))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
@@ -500,7 +478,7 @@ public class Front extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jText_ClientAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel22))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -508,7 +486,7 @@ public class Front extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jText_ClientSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_RefreshClient))
+                    .addComponent(jButton_SearchClientID))
                 .addGap(18, 18, 18)
                 .addComponent(jButton_SearchClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -539,16 +517,16 @@ public class Front extends javax.swing.JFrame {
 
             }
         ));
-        jTable_AppointmentAssesor.setComponentPopupMenu(jPopupMenuClients);
+        jTable_AppointmentAssesor.setComponentPopupMenu(jPopupMenu_AssesorData);
         jScrollPane8.setViewportView(jTable_AppointmentAssesor);
 
         jLabel13.setText("ID");
 
-        jText_ID1.setEnabled(false);
+        jText_AppointmentAssesorID.setEnabled(false);
 
         jLabel14.setText("Name");
 
-        jText_Name1.setEnabled(false);
+        jText_AppointmentAssesorName.setEnabled(false);
 
         jTable_AppointmentAutomobile.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -561,16 +539,10 @@ public class Front extends javax.swing.JFrame {
 
             }
         ));
-        jTable_AppointmentAutomobile.setComponentPopupMenu(jPopupMenuClients);
+        jTable_AppointmentAutomobile.setComponentPopupMenu(jPopupMenu_AutomobileData);
         jScrollPane9.setViewportView(jTable_AppointmentAutomobile);
 
         jLabel42.setText("Client ID to search:");
-
-        jText_AppointmentClientSearchID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jText_AppointmentClientSearchIDActionPerformed(evt);
-            }
-        });
 
         jButton_AppointmentSearchClient.setText("Search");
         jButton_AppointmentSearchClient.addActionListener(new java.awt.event.ActionListener() {
@@ -589,30 +561,35 @@ public class Front extends javax.swing.JFrame {
 
         jLabel52.setText("Phone Number");
 
-        jText_PhoneNumber1.setEnabled(false);
+        jText_AppointmentAssesorPhoneNumber.setEnabled(false);
 
-        jText_ClientViewPlate1.setEnabled(false);
+        jText_AppointmentPlate.setEnabled(false);
 
         jLabel53.setText("Motor");
 
         jLabel54.setText("Plate");
 
-        jText_ClientViewModel1.setEnabled(false);
+        jText_AppointmentModel.setEnabled(false);
 
-        jText_ClientViewMotor1.setEnabled(false);
+        jText_AppointmentMotor.setEnabled(false);
 
         jLabel55.setText("Model");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_AppointmentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintenance", "Reparation" }));
+        jComboBox_AppointmentType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_AppointmentTypeActionPerformed(evt);
+            }
+        });
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton_AddAppointment.setText("Add Appointment");
+        jButton_AddAppointment.setText("Create Appointment");
         jButton_AddAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_AddAppointmentActionPerformed(evt);
             }
         });
+
+        jLabel56.setText("Appointment ID:");
 
         javax.swing.GroupLayout pruebaLayout = new javax.swing.GroupLayout(prueba);
         prueba.setLayout(pruebaLayout);
@@ -636,21 +613,30 @@ public class Front extends javax.swing.JFrame {
                                     .addComponent(jText_AppointmentClientID, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                                     .addComponent(jText_AppointmentClientName))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pruebaLayout.createSequentialGroup()
+                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pruebaLayout.createSequentialGroup()
                                 .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel50)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pruebaLayout.createSequentialGroup()
+                                        .addComponent(jLabel50)
+                                        .addGap(47, 47, 47))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pruebaLayout.createSequentialGroup()
+                                        .addComponent(jLabel51)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jText_AppointmentDepartureDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(jText_AppointmentEntryDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                            .addGroup(pruebaLayout.createSequentialGroup()
+                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel15)
                                     .addComponent(jLabel49))
-                                .addGap(37, 37, 37))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pruebaLayout.createSequentialGroup()
-                                .addComponent(jLabel51)
-                                .addGap(18, 18, 18)))
-                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jText_AppointmentDepartureDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(jText_AppointmentEntryDate, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(37, 37, 37)
+                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox_AppointmentType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox_AppointmentTypeDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pruebaLayout.createSequentialGroup()
+                                .addComponent(jLabel56)
+                                .addGap(18, 18, 18)
+                                .addComponent(jText_AppointmentID)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pruebaLayout.createSequentialGroup()
                         .addComponent(jLabel42)
@@ -678,20 +664,20 @@ public class Front extends javax.swing.JFrame {
                                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING))
                                         .addGap(62, 62, 62)
                                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jText_Name1)
-                                            .addComponent(jText_ID1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                            .addComponent(jText_ClientViewPlate1)
-                                            .addComponent(jText_ClientViewModel1)
-                                            .addComponent(jText_ClientViewMotor1)))
+                                            .addComponent(jText_AppointmentAssesorName)
+                                            .addComponent(jText_AppointmentAssesorID)
+                                            .addComponent(jText_AppointmentPlate)
+                                            .addComponent(jText_AppointmentModel)
+                                            .addComponent(jText_AppointmentMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(pruebaLayout.createSequentialGroup()
                                         .addGap(96, 96, 96)
-                                        .addComponent(jText_PhoneNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jText_AppointmentAssesorPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 56, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(pruebaLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pruebaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_AddAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(80, 80, 80))
         );
         pruebaLayout.setVerticalGroup(
             pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -701,72 +687,75 @@ public class Front extends javax.swing.JFrame {
                     .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jText_AppointmentClientSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_AppointmentSearchClient))
+                .addGap(11, 11, 11)
                 .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pruebaLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel46)
+                            .addComponent(jText_AppointmentClientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pruebaLayout.createSequentialGroup()
-                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel46)
-                                    .addComponent(jText_AppointmentClientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(23, 23, 23)
-                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jText_AppointmentClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel47))
-                                .addGap(18, 18, 18)
-                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel48)
-                                    .addComponent(jText_AppointmentClientPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jText_AppointmentClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel47))
+                        .addGap(18, 18, 18)
+                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel48)
+                            .addComponent(jText_AppointmentClientPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pruebaLayout.createSequentialGroup()
+                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pruebaLayout.createSequentialGroup()
                                 .addComponent(jText_AppointmentEntryDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jText_AppointmentDepartureDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel51))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(pruebaLayout.createSequentialGroup()
+                                    .addComponent(jLabel51)))
+                            .addComponent(jLabel50))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel50)
-                        .addGap(71, 71, 71)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel49)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(32, 32, 32)
+                            .addComponent(jText_AppointmentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel56))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jComboBox_AppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pruebaLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jComboBox_AppointmentTypeDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(18, 18, 18)
                 .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pruebaLayout.createSequentialGroup()
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel54)
-                            .addComponent(jText_ClientViewPlate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jText_AppointmentPlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel55)
-                            .addComponent(jText_ClientViewModel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jText_AppointmentModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel53)
-                            .addComponent(jText_ClientViewMotor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jText_AppointmentMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(52, 52, 52)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(jText_Name1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jText_AppointmentAssesorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jText_ID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jText_AppointmentAssesorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pruebaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel52)
-                            .addComponent(jText_PhoneNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jText_AppointmentAssesorPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pruebaLayout.createSequentialGroup()
                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton_AddAppointment)
-                .addGap(21, 21, 21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane_Appointment.addTab("Appointments", prueba);
@@ -785,7 +774,7 @@ public class Front extends javax.swing.JFrame {
             .addGroup(jf_AdministratorMenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane_Appointment)
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
 
         jMenuItem_View.setText("Quick View");
@@ -794,7 +783,7 @@ public class Front extends javax.swing.JFrame {
                 jMenuItem_ViewActionPerformed(evt);
             }
         });
-        jPopupMenuEmployees.add(jMenuItem_View);
+        jPopupMenuAssesor.add(jMenuItem_View);
 
         jMenuItem_DeleteEmployee.setText("DeleteEmployee");
         jMenuItem_DeleteEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -802,7 +791,7 @@ public class Front extends javax.swing.JFrame {
                 jMenuItem_DeleteEmployeeActionPerformed(evt);
             }
         });
-        jPopupMenuEmployees.add(jMenuItem_DeleteEmployee);
+        jPopupMenuAssesor.add(jMenuItem_DeleteEmployee);
 
         jMenuItem_DetailView.setText("Detailed View");
         jMenuItem_DetailView.addActionListener(new java.awt.event.ActionListener() {
@@ -810,7 +799,7 @@ public class Front extends javax.swing.JFrame {
                 jMenuItem_DetailViewActionPerformed(evt);
             }
         });
-        jPopupMenuEmployees.add(jMenuItem_DetailView);
+        jPopupMenuAssesor.add(jMenuItem_DetailView);
 
         jLabel30.setText("Name");
 
@@ -852,6 +841,13 @@ public class Front extends javax.swing.JFrame {
 
         jLabel3.setText("Unassingned Mechanics:");
 
+        jButton_RefreshAssesor.setText("Refresh");
+        jButton_RefreshAssesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RefreshAssesorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -888,6 +884,10 @@ public class Front extends javax.swing.JFrame {
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_RefreshAssesor, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(146, 146, 146))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -925,7 +925,9 @@ public class Front extends javax.swing.JFrame {
                 .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_RefreshAssesor)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jf_AssesorLayout = new javax.swing.GroupLayout(jf_Assesor.getContentPane());
@@ -937,116 +939,6 @@ public class Front extends javax.swing.JFrame {
         jf_AssesorLayout.setVerticalGroup(
             jf_AssesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        jLabel32.setText("Name");
-
-        jText_AssignAssesor.setEnabled(false);
-
-        jLabel33.setText("ID");
-
-        jText_MechanicID.setEnabled(false);
-
-        jLabel34.setText("Phone Number");
-
-        jText_MechanicPhoneNumber.setEnabled(false);
-
-        jLabel35.setText("Assign Assesor");
-
-        jText_MechanicName.setEnabled(false);
-
-        jLabel36.setText("Assign Appointments:");
-
-        jTable_AssingAppointments.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane6.setViewportView(jTable_AssingAppointments);
-
-        jButton_AssignAppointment.setText("Assign Apointment");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel36)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jCombo_AssignAppointments, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_AssignAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel32)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel35)
-                    .addComponent(jLabel34))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jText_MechanicPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jText_AssignAssesor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jText_MechanicID, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jText_MechanicName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(163, 163, 163))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel32)
-                    .addComponent(jText_MechanicName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jLabel35))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jText_AssignAssesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jText_MechanicID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel34)
-                    .addComponent(jText_MechanicPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel36)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_AssignAppointment)
-                    .addComponent(jCombo_AssignAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jf_MechanicLayout = new javax.swing.GroupLayout(jf_Mechanic.getContentPane());
-        jf_Mechanic.getContentPane().setLayout(jf_MechanicLayout);
-        jf_MechanicLayout.setHorizontalGroup(
-            jf_MechanicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jf_MechanicLayout.setVerticalGroup(
-            jf_MechanicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jButton_AddAutomobile.setText("Add");
@@ -1097,10 +989,10 @@ public class Front extends javax.swing.JFrame {
 
         jText_ClientViewID.setEnabled(false);
 
-        jButton_RefreshEmployee2.setText("Refresh");
-        jButton_RefreshEmployee2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_RefreshAutomobilesClientView.setText("Refresh");
+        jButton_RefreshAutomobilesClientView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_RefreshEmployee2ActionPerformed(evt);
+                jButton_RefreshAutomobilesClientViewActionPerformed(evt);
             }
         });
 
@@ -1154,7 +1046,7 @@ public class Front extends javax.swing.JFrame {
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jf_ClientLayout.createSequentialGroup()
-                        .addComponent(jButton_RefreshEmployee2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_RefreshAutomobilesClientView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         jf_ClientLayout.setVerticalGroup(
@@ -1202,7 +1094,7 @@ public class Front extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton_RefreshEmployee2)
+                .addComponent(jButton_RefreshAutomobilesClientView)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -1229,6 +1121,22 @@ public class Front extends javax.swing.JFrame {
             }
         });
         jPopupMenuClients.add(jMenuItem_DetailViewClient);
+
+        jMenuItem_GetAutomobileData.setText("See Data");
+        jMenuItem_GetAutomobileData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_GetAutomobileDataActionPerformed(evt);
+            }
+        });
+        jPopupMenu_AutomobileData.add(jMenuItem_GetAutomobileData);
+
+        jMenuItem_GetAssesorData.setText("See Data");
+        jMenuItem_GetAssesorData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_GetAssesorDataActionPerformed(evt);
+            }
+        });
+        jPopupMenu_AssesorData.add(jMenuItem_GetAssesorData);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1383,12 +1291,12 @@ public class Front extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_LogInActionPerformed
 
     private void jMenuItem_DeleteEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_DeleteEmployeeActionPerformed
-        jPopupMenuEmployees.setVisible(true);
+        jPopupMenuAssesor.setVisible(true);
         JDialog.setDefaultLookAndFeelDecorated(true);
         int Response = JOptionPane.showConfirmDialog(null, "Seguro que desear eliminar este empleado?", "Confirm",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (Response == JOptionPane.NO_OPTION) {
-            jPopupMenuEmployees.setVisible(false);
+            jPopupMenuAssesor.setVisible(false);
         } else if (Response == JOptionPane.YES_OPTION) {
             int Row = jTable_Employees.getSelectedRow();
             String ID= "";
@@ -1603,7 +1511,7 @@ public class Front extends javax.swing.JFrame {
         jf_Client.pack();
     }//GEN-LAST:event_jMenuItem_DetailViewClientActionPerformed
 
-    private void jButton_RefreshClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshClientActionPerformed
+    private void jButton_SearchClientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SearchClientIDActionPerformed
         SQLQuery = "SELECT * FROM cliente WHERE IDCliente='"+jText_ClientSearchID.getText()+"'";
         try {
             ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
@@ -1625,7 +1533,7 @@ public class Front extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton_RefreshClientActionPerformed
+    }//GEN-LAST:event_jButton_SearchClientIDActionPerformed
 
     private void jButton_SearchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SearchClientActionPerformed
        SQLQuery = "SELECT * FROM cliente ";
@@ -1651,14 +1559,6 @@ public class Front extends javax.swing.JFrame {
         }
                      
     }//GEN-LAST:event_jButton_SearchClientActionPerformed
-
-    private void jText_ClientSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_ClientSearchIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jText_ClientSearchIDActionPerformed
-
-    private void jText_EmployeeSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_EmployeeSearchIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jText_EmployeeSearchIDActionPerformed
 
     private void jButton_RefreshEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshEmployeeActionPerformed
         SQLQuery = "SELECT * FROM empleado";
@@ -1745,9 +1645,27 @@ public class Front extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_SearchEmployeeActionPerformed
 
-    private void jButton_RefreshEmployee2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshEmployee2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_RefreshEmployee2ActionPerformed
+    private void jButton_RefreshAutomobilesClientViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshAutomobilesClientViewActionPerformed
+        //Creacion de la tabla Assign Automobiles
+        try {
+            //Creacion de la tabla Assign Automobiles
+            DefaultTableModel Modelo = new DefaultTableModel();
+            Modelo.addColumn("Plate");
+            Modelo.addColumn("Model");
+            Modelo.addColumn("#Motor");
+            SQLQuery = "SELECT * FROM automovil WHERE IDCliente='"+jText_ClientViewID.getText()+"'";
+            ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
+            while (QueryResult.next()) {
+                EmployeesResutl[0] = QueryResult.getString(1);
+                EmployeesResutl[1] = QueryResult.getString(2);
+                EmployeesResutl[2] = QueryResult.getString(3); 
+                Modelo.addRow(EmployeesResutl);
+            }
+            jTable_ClientViewAutomobiles.setModel(Modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_RefreshAutomobilesClientViewActionPerformed
 
     private void jButton_AddClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddClientActionPerformed
         try {
@@ -1797,10 +1715,6 @@ public class Front extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_AddAutomobileActionPerformed
 
-    private void jText_AppointmentClientSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_AppointmentClientSearchIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jText_AppointmentClientSearchIDActionPerformed
-
     private void jButton_AppointmentSearchClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AppointmentSearchClientActionPerformed
         SQLQuery = "SELECT * FROM cliente WHERE IDCliente='"+jText_AppointmentClientSearchID.getText()+"'";
         try {
@@ -1846,12 +1760,96 @@ public class Front extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_AppointmentSearchClientActionPerformed
 
     private void jButton_AddAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddAppointmentActionPerformed
-        // TODO add your handling code here:
+        try {
+            if (CheckExistingPrimaryKey("cita","IDCita",jText_AppointmentID.getText())==true) {
+                JOptionPane.showMessageDialog(this,"Theres already a Appointment with that ID");
+            }else{
+                PreparedStatement PreparedQuery = ConectionQuery.prepareStatement("INSERT INTO cita (IDCita,Placa,FechaEntrada,FechaSalida,NombreCliente,TelefonoContacto,EstadoCita,IDAsesor,TipoCita) VALUES(?,?,?,?,?,?,?,?,?)");
+                PreparedQuery.setString(1,jText_AppointmentID.getText());
+                PreparedQuery.setString(2,jText_AppointmentPlate.getText());
+                PreparedQuery.setString(3,jText_AppointmentEntryDate.getText());
+                PreparedQuery.setString(4,jText_AppointmentDepartureDate.getText());
+                PreparedQuery.setString(5,jText_AppointmentClientName.getText());
+                PreparedQuery.setString(6,jText_AppointmentClientPhoneNumber.getText());
+                PreparedQuery.setString(7,"Requested");
+                PreparedQuery.setString(8,jText_AppointmentAssesorID.getText());
+                if (jComboBox_AppointmentType.equals("Maintenance")) {
+                    PreparedQuery.setString(9,"Maintenance:"+jComboBox_AppointmentTypeDetails.getSelectedItem().toString());
+                }else{
+                    PreparedQuery.setString(9,"Reparation:"+jComboBox_AppointmentTypeDetails.getSelectedItem().toString());
+                }
+                PreparedQuery.executeUpdate();
+            }        
+        } catch (SQLException ex) {
+            Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton_AddAppointmentActionPerformed
 
     private void jTabbedPane_AppointmentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane_AppointmentMouseClicked
         
     }//GEN-LAST:event_jTabbedPane_AppointmentMouseClicked
+
+    private void jButton_RefreshAssesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshAssesorActionPerformed
+        try {
+            SQLQuery = "SELECT IDMecanicos FROM asesor WHERE IDAsesor='"+jText_AssesorID.getText()+"'";
+            ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
+            EmployeesResutl[0] ="1";//Assign the first one
+            while (QueryResult.next()) {
+                EmployeesResutl[0] = QueryResult.getString(1);
+            }
+            String[] MultiVariable = DivideTokens(EmployeesResutl[0]);
+            //Creacion de la tabla AssingMechanics
+            DefaultTableModel Modelo = new DefaultTableModel();
+            Modelo.addColumn("Employee ID");
+            Modelo.addColumn("Phone Number");
+            Modelo.addColumn("Employee Name");
+            Modelo.addColumn("Employee Type");
+            for (int i = 0; i <MultiVariable.length; i++) {
+                SQLQuery = "SELECT * FROM empleado WHERE IDEmpleado='"+MultiVariable[i]+"'";
+                QueryResult = QueryState.executeQuery(SQLQuery);
+                if (QueryResult.next()) {
+                    EmployeesResutl[0] = QueryResult.getString(1);
+                    EmployeesResutl[1] = QueryResult.getString(2);
+                    EmployeesResutl[2] = QueryResult.getString(3);
+                    EmployeesResutl[3] = QueryResult.getString(4);
+                    Modelo.addRow(EmployeesResutl);
+                }
+
+            }
+            jTable_AssingMechanics.setModel(Modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton_RefreshAssesorActionPerformed
+
+    private void jComboBox_AppointmentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_AppointmentTypeActionPerformed
+        jComboBox_AppointmentTypeDetails.removeAllItems();
+        if (jComboBox_AppointmentType.getSelectedItem().equals("Maintenance")) {
+            jComboBox_AppointmentTypeDetails.addItem("5,000");
+            jComboBox_AppointmentTypeDetails.addItem("10,000");
+            jComboBox_AppointmentTypeDetails.addItem("15,000");
+        }else{
+            jComboBox_AppointmentTypeDetails.addItem("Oil Change");
+            jComboBox_AppointmentTypeDetails.addItem("Primary Start Engine");
+            jComboBox_AppointmentTypeDetails.addItem("Dead Alternator");
+            jComboBox_AppointmentTypeDetails.addItem("Leaky Radiator");
+        }
+    }//GEN-LAST:event_jComboBox_AppointmentTypeActionPerformed
+
+    private void jMenuItem_GetAutomobileDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GetAutomobileDataActionPerformed
+        int Row = jTable_AppointmentAutomobile.getSelectedRow();
+        jText_AppointmentPlate.setText(jTable_AppointmentAutomobile.getValueAt(Row,0).toString());
+        jText_AppointmentModel.setText(jTable_AppointmentAutomobile.getValueAt(Row,1).toString());
+        jText_AppointmentMotor.setText(jTable_AppointmentAutomobile.getValueAt(Row,2).toString());
+       
+    }//GEN-LAST:event_jMenuItem_GetAutomobileDataActionPerformed
+
+    private void jMenuItem_GetAssesorDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GetAssesorDataActionPerformed
+        int Row = jTable_AppointmentAssesor.getSelectedRow();
+        jText_AppointmentAssesorID.setText(jTable_AppointmentAssesor.getValueAt(Row,0).toString());
+        jText_AppointmentAssesorName.setText(jTable_AppointmentAssesor.getValueAt(Row,2).toString());
+        jText_AppointmentAssesorPhoneNumber.setText(jTable_AppointmentAssesor.getValueAt(Row,1).toString());
+    }//GEN-LAST:event_jMenuItem_GetAssesorDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1905,20 +1903,19 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JButton jButton_AddClient;
     private javax.swing.JButton jButton_AddEmployee;
     private javax.swing.JButton jButton_AppointmentSearchClient;
-    private javax.swing.JButton jButton_AssignAppointment;
     private javax.swing.JButton jButton_AssignMechanic;
     private javax.swing.JButton jButton_LogIn;
     private javax.swing.JButton jButton_ModifyClient;
     private javax.swing.JButton jButton_ModifyEmployee;
-    private javax.swing.JButton jButton_RefreshClient;
+    private javax.swing.JButton jButton_RefreshAssesor;
+    private javax.swing.JButton jButton_RefreshAutomobilesClientView;
     private javax.swing.JButton jButton_RefreshEmployee;
-    private javax.swing.JButton jButton_RefreshEmployee2;
     private javax.swing.JButton jButton_SearchClient;
+    private javax.swing.JButton jButton_SearchClientID;
     private javax.swing.JButton jButton_SearchEmployee;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jCombo_AssignAppointments;
+    private javax.swing.JComboBox<String> jComboBox_AppointmentType;
+    private javax.swing.JComboBox<String> jComboBox_AppointmentTypeDetails;
     private javax.swing.JComboBox<String> jCombo_AssignMechanics;
     private javax.swing.JComboBox<String> jCombo_EmployeeType;
     private javax.swing.JLabel jLabel1;
@@ -1946,11 +1943,6 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -1971,6 +1963,7 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1979,43 +1972,50 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_DeleteEmployee;
     private javax.swing.JMenuItem jMenuItem_DetailView;
     private javax.swing.JMenuItem jMenuItem_DetailViewClient;
+    private javax.swing.JMenuItem jMenuItem_GetAssesorData;
+    private javax.swing.JMenuItem jMenuItem_GetAutomobileData;
     private javax.swing.JMenuItem jMenuItem_View;
     private javax.swing.JMenuItem jMenuItem_ViewClient;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPasswordField jPassword_Client;
     private javax.swing.JPasswordField jPassword_PassworLogIn;
+    private javax.swing.JPopupMenu jPopupMenuAssesor;
     private javax.swing.JPopupMenu jPopupMenuClients;
-    private javax.swing.JPopupMenu jPopupMenuEmployees;
+    private javax.swing.JPopupMenu jPopupMenu_AssesorData;
+    private javax.swing.JPopupMenu jPopupMenu_AutomobileData;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane_Appointment;
     private javax.swing.JTable jTable_AppointmentAssesor;
     private javax.swing.JTable jTable_AppointmentAutomobile;
-    private javax.swing.JTable jTable_AssingAppointments;
     private javax.swing.JTable jTable_AssingMechanics;
     private javax.swing.JTable jTable_ClientViewAutomobiles;
     private javax.swing.JTable jTable_Clients;
     private javax.swing.JTable jTable_Employees;
+    private javax.swing.JTextField jText_AppointmentAssesorID;
+    private javax.swing.JTextField jText_AppointmentAssesorName;
+    private javax.swing.JTextField jText_AppointmentAssesorPhoneNumber;
     private javax.swing.JTextField jText_AppointmentClientID;
     private javax.swing.JTextField jText_AppointmentClientName;
     private javax.swing.JTextField jText_AppointmentClientPhoneNumber;
     private javax.swing.JTextField jText_AppointmentClientSearchID;
     private javax.swing.JTextField jText_AppointmentDepartureDate;
     private javax.swing.JTextField jText_AppointmentEntryDate;
+    private javax.swing.JTextField jText_AppointmentID;
+    private javax.swing.JTextField jText_AppointmentModel;
+    private javax.swing.JTextField jText_AppointmentMotor;
+    private javax.swing.JTextField jText_AppointmentPlate;
     private javax.swing.JTextField jText_AssesorID;
     private javax.swing.JTextField jText_AssesorName;
     private javax.swing.JTextField jText_AssesorPassword;
     private javax.swing.JTextField jText_AssesorPhoneNumber;
-    private javax.swing.JTextField jText_AssignAssesor;
     private javax.swing.JTextField jText_ClientAdress;
     private javax.swing.JTextField jText_ClientEmail;
     private javax.swing.JTextField jText_ClientID;
@@ -2026,29 +2026,19 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JTextField jText_ClientViewEmail;
     private javax.swing.JTextField jText_ClientViewID;
     private javax.swing.JTextField jText_ClientViewModel;
-    private javax.swing.JTextField jText_ClientViewModel1;
     private javax.swing.JTextField jText_ClientViewMotor;
-    private javax.swing.JTextField jText_ClientViewMotor1;
     private javax.swing.JTextField jText_ClientViewName;
     private javax.swing.JTextField jText_ClientViewPhoneNumber;
     private javax.swing.JTextField jText_ClientViewPlate;
-    private javax.swing.JTextField jText_ClientViewPlate1;
     private javax.swing.JTextField jText_EmployeeSearchID;
     private javax.swing.JTextField jText_ID;
-    private javax.swing.JTextField jText_ID1;
-    private javax.swing.JTextField jText_MechanicID;
-    private javax.swing.JTextField jText_MechanicName;
-    private javax.swing.JTextField jText_MechanicPhoneNumber;
     private javax.swing.JTextField jText_Name;
-    private javax.swing.JTextField jText_Name1;
     private javax.swing.JTextField jText_PhoneNumber;
-    private javax.swing.JTextField jText_PhoneNumber1;
     private javax.swing.JTextField jText_UserName;
     private javax.swing.JTextField jText_UsernameLogIn;
     private javax.swing.JFrame jf_AdministratorMenu;
     private javax.swing.JFrame jf_Assesor;
     private javax.swing.JFrame jf_Client;
-    private javax.swing.JFrame jf_Mechanic;
     private javax.swing.JPanel prueba;
     // End of variables declaration//GEN-END:variables
     String SQLQuery = "";
