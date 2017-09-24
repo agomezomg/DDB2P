@@ -1918,38 +1918,38 @@ public class Front extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton_LogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LogInActionPerformed
-   String UserType = (String) jComboBox1.getSelectedItem();
+        String UserType = (String) jComboBox1.getSelectedItem();
         if (UserType.equals("Administrator")) {
-             if (jText_UsernameLogIn.getText().equals("Juana")) {
-                    jf_AdministratorMenu.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
-                    jf_AdministratorMenu.pack();
-                    jf_AdministratorMenu.setLocationRelativeTo(this);
-                    jf_AdministratorMenu.setVisible(true);
-                    jText_UsernameLogIn.setText("");
-                    jPassword_PasswordLogIn.setText("");
-                    SQLQuery = "SELECT * FROM empleado";
-                    try {
+            if (jText_UsernameLogIn.getText().equals("Juana")) {
+                jf_AdministratorMenu.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
+                jf_AdministratorMenu.pack();
+                jf_AdministratorMenu.setLocationRelativeTo(this);
+                jf_AdministratorMenu.setVisible(true);
+                jText_UsernameLogIn.setText("");
+                jPassword_PasswordLogIn.setText("");
+                SQLQuery = "SELECT * FROM empleado";
+                try {
 
-                        ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
-                        DefaultTableModel Modelo = new DefaultTableModel();
-                        Modelo.addColumn("Employee ID");
-                        Modelo.addColumn("Phone Number");
-                        Modelo.addColumn("Employee Name");
-                        Modelo.addColumn("Employee Type");
-                        while (QueryResult.next()) {
-                            EmployeesResutl[0] = QueryResult.getString(1);
-                            EmployeesResutl[1] = QueryResult.getString(2);
-                            EmployeesResutl[2] = QueryResult.getString(3);
-                            EmployeesResutl[3] = QueryResult.getString(4);
-                            Modelo.addRow(EmployeesResutl);
-                        }
-                        jTable_Employees.setModel(Modelo);
-                    } catch (SQLException ex) {
-                        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+                    ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
+                    DefaultTableModel Modelo = new DefaultTableModel();
+                    Modelo.addColumn("Employee ID");
+                    Modelo.addColumn("Phone Number");
+                    Modelo.addColumn("Employee Name");
+                    Modelo.addColumn("Employee Type");
+                    while (QueryResult.next()) {
+                        EmployeesResutl[0] = QueryResult.getString(1);
+                        EmployeesResutl[1] = QueryResult.getString(2);
+                        EmployeesResutl[2] = QueryResult.getString(3);
+                        EmployeesResutl[3] = QueryResult.getString(4);
+                        Modelo.addRow(EmployeesResutl);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Wrong username or password");
+                    jTable_Employees.setModel(Modelo);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Wrong username or password");
+            }
         } else if (UserType.equals("Assesor")) {
             try {
                 SQLQuery = "SELECT IDMecanicos FROM asesor WHERE IDAsesor='" + jText_AssesorID.getText() + "'";
@@ -3039,6 +3039,23 @@ public class Front extends javax.swing.JFrame {
         return Results;
     }
 
+    public boolean verificar(String userName, String Password) {
+        SQLQuery = "SELECT * FROM usuario";
+        try {
+
+            ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
+            while (QueryResult.next()) {
+
+                if (QueryResult.getString(1).equals(userName) && QueryResult.getString(2).equals(Password)) {
+
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     /*  
         To SELECT
         SQLQuery = "SELECT * FROM TableName"; The Direct Query
