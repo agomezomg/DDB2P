@@ -1308,6 +1308,10 @@ public class Front extends javax.swing.JFrame {
                 PST.executeUpdate();
                 PST = ConectionQuery.prepareStatement("DELETE FROM mecanico WHERE IDMecanico='" +ID+ "'");
                 PST.executeUpdate();
+                //Erase User Stored Procedure
+                PST = ConectionQuery.prepareStatement("{call proyecto.deleteUser(?)}");
+                PST.setString(1,ID);
+                PST.executeQuery();
             } catch (SQLException ex) {
                 Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1473,6 +1477,10 @@ public class Front extends javax.swing.JFrame {
                 PST.executeUpdate();
                 PST = ConectionQuery.prepareStatement("DELETE FROM automovil WHERE IDCliente='" + ID+ "'");
                 PST.executeUpdate();
+                //Erase User Stored Procedure
+                PST = ConectionQuery.prepareStatement("{call proyecto.deleteUser(?)}");
+                PST.setString(1,ID);
+                PST.executeQuery();
             } catch (SQLException ex) {
                 Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1616,6 +1624,13 @@ public class Front extends javax.swing.JFrame {
                     PreparedQuery = ConectionQuery.prepareStatement("INSERT INTO asesor (IDAsesor) VALUES(?)");
                     PreparedQuery.setString(1,jText_ID.getText());
                     PreparedQuery.executeUpdate();
+                    //Create User Stored Procedure
+                    PreparedQuery = ConectionQuery.prepareStatement("{call proyecto.createUser(?,?,?,?)}");
+                    PreparedQuery.setString(1,jText_UserName.getText());
+                    PreparedQuery.setString(2,"123");
+                    PreparedQuery.setString(3,"Assesor");
+                    PreparedQuery.setString(4,jText_ID.getText());
+                    PreparedQuery.executeQuery();
                 }
             }
         } catch (SQLException ex) {
@@ -1680,6 +1695,13 @@ public class Front extends javax.swing.JFrame {
                 PreparedQuery.setString(5,jPassword_Client.getPassword().toString());
                 PreparedQuery.setString(6,jText_ClientAdress.getText());
                 PreparedQuery.executeUpdate();
+                //Create User Stored Procedure
+                PreparedQuery = ConectionQuery.prepareStatement("{call proyecto.createUser(?,?,?,?)}");
+                PreparedQuery.setString(1,jText_ClientName.getText());
+                PreparedQuery.setString(2,jPassword_Client.getSelectedText());
+                PreparedQuery.setString(3,"Client");
+                PreparedQuery.setString(4,jText_ClientID.getText());
+                PreparedQuery.executeQuery();
             }        
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
@@ -1894,13 +1916,6 @@ public class Front extends javax.swing.JFrame {
             public void run() {
                 try {
                     new Front().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Conectar ConectionSocket = new Conectar();
-                Connection Query = ConectionSocket.Conexion();
-                try {
-                    Statement ExecuteQuery = Query.createStatement();
                 } catch (SQLException ex) {
                     Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
                 }
