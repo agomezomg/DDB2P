@@ -1756,7 +1756,7 @@ public class Front extends javax.swing.JFrame {
                     jf_AdministratorMenu.setLocationRelativeTo(this);
                     jf_AdministratorMenu.setVisible(true);
                     jText_UsernameLogIn.setText("");
-                    jText_PasswordLogIn.setText("");
+                    jPassword_PasswordLogIn.setText("");
                     SQLQuery = "SELECT * FROM empleado";
                     try {
 
