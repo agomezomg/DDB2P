@@ -12,7 +12,7 @@ public class Conectar {
     public Connection Conexion() {
         try {
             try {
-                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/phpmyadmin", "root", "");
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/phpmyadmin", "root", "");
                 MysqlDataSource ds = new MysqlDataSource();
                 ds.setServerName("127.0.0.1");
                 //ds.setPort();//No Need of port for local servers

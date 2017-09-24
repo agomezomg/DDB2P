@@ -6,9 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -427,7 +435,7 @@ public class Front extends javax.swing.JFrame {
                     .addComponent(jText_EmployeeSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton_RefreshEmployee)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         jTabbedPane_Appointment.addTab("Employees", jPanel3);
@@ -946,7 +954,7 @@ public class Front extends javax.swing.JFrame {
         );
         jf_AdministratorMenuLayout.setVerticalGroup(
             jf_AdministratorMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane_Appointment, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+            .addComponent(jTabbedPane_Appointment, javax.swing.GroupLayout.PREFERRED_SIZE, 643, Short.MAX_VALUE)
         );
 
         jMenuItem_View.setText("Quick View");
@@ -1922,7 +1930,8 @@ public class Front extends javax.swing.JFrame {
         switch (UserType) {
             case "Administrator":
                 if (jText_UsernameLogIn.getText().equals("Juana")) {
-                    jf_AdministratorMenu.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
+                    jf_AdministratorMenu.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+                    jf_AdministratorMenu.setAlwaysOnTop(true);
                     jf_AdministratorMenu.pack();
                     jf_AdministratorMenu.setLocationRelativeTo(this);
                     jf_AdministratorMenu.setVisible(true);
@@ -2051,6 +2060,7 @@ public class Front extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
             }
+            jf_AdministratorMenu.setAlwaysOnTop(false);
             jf_Assesor.setVisible(true);
             jf_Assesor.pack();
         }/*else if (jTable_Employees.getValueAt(Row,3).toString().equals("Mechanic")) {
@@ -2168,6 +2178,7 @@ public class Front extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jf_AdministratorMenu.setAlwaysOnTop(false);
         jf_Client.setVisible(true);
         jf_Client.pack();
     }//GEN-LAST:event_jMenuItem_DetailViewClientActionPerformed
@@ -2351,7 +2362,7 @@ public class Front extends javax.swing.JFrame {
                 //Create User Stored Procedure
                 PreparedQuery = ConectionQuery.prepareStatement("{call proyecto.createUser(?,?,?,?)}");
                 PreparedQuery.setString(1, jText_ClientName.getText());
-                PreparedQuery.setString(2, jPassword_Client.getSelectedText());
+                PreparedQuery.setString(2, jPassword_Client.getPassword().toString());
                 PreparedQuery.setString(3, "Client");
                 PreparedQuery.setString(4, jText_ClientID.getText());
                 PreparedQuery.executeQuery();
@@ -2399,6 +2410,11 @@ public class Front extends javax.swing.JFrame {
                 jText_AppointmentClientID.setText(QueryResult.getString(1));
                 jText_AppointmentClientName.setText(QueryResult.getString(4));
                 jText_AppointmentClientPhoneNumber.setText(QueryResult.getString(7));
+                To= QueryResult.getString(6);
+                if (QueryResult.getString(2)!=null) {
+                    ClientAppointments=QueryResult.getString(2);
+                }
+                System.out.println(ClientAppointments);
             }
             //Looking for his automobiles
             DefaultTableModel Modelo = new DefaultTableModel();
@@ -2449,6 +2465,8 @@ public class Front extends javax.swing.JFrame {
                 PreparedQuery.setString(6, jText_AppointmentClientPhoneNumber.getText());
                 PreparedQuery.setString(7, "Requested");
                 PreparedQuery.setString(8, jText_AppointmentAssesorID.getText());
+                //Sending Email to client
+                SendMail();
                 if (jComboBox_AppointmentType.equals("Maintenance")) {
                     PreparedQuery.setString(9, "Maintenance:" + jComboBox_AppointmentTypeDetails.getSelectedItem().toString());
                 } else {
@@ -2464,7 +2482,7 @@ public class Front extends javax.swing.JFrame {
             //Assign Appointment to Client
             SQLQuery = "UPDATE cliente SET IDCita=? WHERE IDCliente='" + jText_AppointmentClientID.getText() + "'";
             PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
-            PreparedQuery.setString(1, jText_AppointmentID.getText());
+            PreparedQuery.setString(1,jText_AppointmentID.getText()+","+ClientAppointments);
             PreparedQuery.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
@@ -2941,6 +2959,7 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JFrame jf_mechanics;
     private javax.swing.JPanel prueba;
     // End of variables declaration//GEN-END:variables
+    String ClientAppointments="";
     String SQLQuery = "";
     String AdministratorUsername = "Juana";
     String AdministratorPassword = "123";
@@ -2948,6 +2967,42 @@ public class Front extends javax.swing.JFrame {
     Connection ConectionQuery = ConectionSocket.Conexion();
     Statement QueryState = ConectionQuery.createStatement();
     String[] EmployeesResutl = new String[5];
+    static String Username = "didiermurillo45@gmail.com";
+    static String PassWord = "didiermurillo";
+    static String Mensage = "Thanks for using our services!";
+    static String Subject = "Request Appointment";
+    String To = "";
+
+    public void SendMail() {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        Session session = Session.getInstance(props,
+        //Login to the Email
+        new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(Username, PassWord);
+            }
+        });
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(Username));
+            message.setRecipients(Message.RecipientType.TO,
+            InternetAddress.parse(To));
+            message.setSubject(Subject);
+            message.setText(Mensage);
+            Transport.send(message);
+            jf_AdministratorMenu.setAlwaysOnTop(false);
+            JOptionPane.showMessageDialog(this,"Correctly send email to client!");
+            jf_AdministratorMenu.setAlwaysOnTop(true);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     boolean CheckExistingPrimaryKey(String TableName, String PrimaryKey, String ComparableKey) throws SQLException {
         SQLQuery = "SELECT " + PrimaryKey + " FROM " + TableName + "";
