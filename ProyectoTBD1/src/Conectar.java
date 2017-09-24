@@ -13,7 +13,6 @@ public class Conectar {
         try {
             try {
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/phpmyadmin", "root", "");
-                JOptionPane.showMessageDialog(null, "connected with " + con.toString());
                 MysqlDataSource ds = new MysqlDataSource();
                 ds.setServerName("127.0.0.1");
                 //ds.setPort();//No Need of port for local servers
@@ -21,11 +20,11 @@ public class Conectar {
                 ds.setUser("root");
                 Scanner sc = new Scanner(System.in);
                 System.out.println("PASSWORD PROMPT: ");
-                String pass = sc.nextLine();
+                String pass = "empty";
                 ds.setPassword(pass);
                 conectar = con;
             } catch (SQLException | HeadlessException e) {
-                JOptionPane.showMessageDialog(null, "not connect to server and message is: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Connection failed due to the following error: " + e.getMessage());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
