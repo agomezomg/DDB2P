@@ -3080,7 +3080,56 @@ public class Front extends javax.swing.JFrame {
         }
         return Result;
     }
+    public ArrayList<Client> createClientQueue() {
+        /*
+        Recupera clientIDS.
+        De los clientIDS, cuenta la cantidad de citas para ese cliente.
+        Se crea un cliente temporal utilizando la clase client.
+         */
+        String query = "SELECT cliente.IDCliente FROM cliente;";
+        ArrayList<Client> finalClientList = null;
+        try {
+            ResultSet rSet = QueryState.executeQuery(query);
+            ArrayList<String> clientResults;
+            ArrayList<Integer> appResults = new ArrayList<>();
+            clientResults = new ArrayList<>();
+            for (int i = 0; rSet.next(); i++) {
+                clientResults.add(rSet.getString(i));
+            }
+            for (int i = 0; i < clientResults.size(); i++) {
+                String cQuery = "SELECT cliente.IDCita FROM cliente WHERE cliente.IDCliente = " + clientResults.get(i) + ";";
+                ResultSet reSet = QueryState.executeQuery(cQuery);
+                for (int j = 0; reSet.next(); j++) {
+                    appResults.add(countAppointmentIDs(reSet.getString(j)));
+                }
+            }
 
+            finalClientList = new ArrayList<>();
+
+            for (int i = 0; i < clientResults.size(); i++) {
+                String idCl = clientResults.get(i);
+                int value = appResults.get(i);
+                Client toInsert = new Client(idCl, value, " ", " ");
+                finalClientList.add(toInsert);
+            }
+            Collections.sort(finalClientList, new AppCountCompare() {
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return finalClientList;
+    }
+
+    private int countAppointmentIDs(String Tokens) {
+        int count = 0;
+        Scanner SC = new Scanner(Tokens);
+        SC.useDelimiter(",");
+        while (SC.hasNext() == true && count < 10) {
+            count++;
+        }
+        return count;
+    }
+    
     String[] DivideTokens(String Tokens) {
         Scanner SC = new Scanner(Tokens);
         SC.useDelimiter(",");
