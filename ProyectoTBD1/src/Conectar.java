@@ -10,22 +10,20 @@ public class Conectar {
     Connection conectar = null;
 
     public Connection Conexion() {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/phpmyadmin", "root", "");
-            JOptionPane.showMessageDialog(null, "connected with " + con.toString());
+    Connection conectar=null;
+
+        try{
             MysqlDataSource ds = new MysqlDataSource();
             ds.setServerName("127.0.0.1");
             //ds.setPort();//No Need of port for local servers
             ds.setDatabaseName("proyecto");
             ds.setUser("root");
-            Scanner sc = new Scanner(System.in);
-            System.out.println("PASSWORD PROMPT: ");
-            String pass = "empty";
-            ds.setPassword(pass);
-            conectar = con;
-        } catch (SQLException | HeadlessException e) {
+            ds.setPassword("");
+            conectar = ds.getConnection();
+        }catch(Exception e){
             System.out.println(e.getMessage());
         }
         return conectar;
     }
 }
+
