@@ -1,4 +1,4 @@
-import java.util.Comparator;
+
 import java.util.ArrayList;
 
 /*
@@ -94,9 +94,5 @@ public class Client extends User {
     public void setAppointmentCount(int appointmentCount) {
         this.appointmentCount = appointmentCount;
     }
-    
-    public int compare(Client cl1, Client cl2) {
-        return cl2.getAppointmentCount() - cl1.getAppointmentCount();
-    }
-    
+
 }

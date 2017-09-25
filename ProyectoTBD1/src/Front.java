@@ -3047,6 +3047,7 @@ public class Front extends javax.swing.JFrame {
             }
 
             Collections.sort(finalClientList, new ClientComparator());
+
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
         }
