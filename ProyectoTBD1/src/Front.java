@@ -20,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.Collections;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -1910,10 +1911,10 @@ public class Front extends javax.swing.JFrame {
     private void jButton_LogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LogInActionPerformed
         String UserType = (String) jComboBox1.getSelectedItem();
         String userName = jText_UsernameLogIn.getText();
-        String PassWord = jPassword_PasswordLogIn.getText();
-        if (this.verificar(userName, PassWord)) {
+        String logpassword = jPassword_PasswordLogIn.getText();
+        if (this.verificar(userName, logpassword)) {
             String tipo = "";
-            if (UserType.equals("Assesor")) {
+            if (UserType.equals("Assessor")) {
                 SQLQuery = "SELECT * FROM empleado WHERE IDEmpleado='" + IDtemp + "'";
                 ResultSet QueryResult;
                 try {
@@ -2007,41 +2008,38 @@ public class Front extends javax.swing.JFrame {
                     Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-            } else {
+            } else if (UserType.equals("Administrator") && jText_UsernameLogIn.getText().equals("Juana") && jPassword_PasswordLogIn.getText().equals("123")) {
 
-            }
-        } else if (UserType.equals("Administrator") && jText_UsernameLogIn.getText().equals("Juana") && jPassword_PasswordLogIn.getText().equals("123")) {
+                jf_AdministratorMenu.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
+                jf_AdministratorMenu.pack();
+                jf_AdministratorMenu.setLocationRelativeTo(this);
+                jf_AdministratorMenu.setVisible(true);
+                jText_UsernameLogIn.setText("");
+                jPassword_PasswordLogIn.setText("");
+                SQLQuery = "SELECT * FROM empleado";
+                try {
 
-            jf_AdministratorMenu.setModalExclusionType(Dialog.ModalExclusionType.NO_EXCLUDE);
-            jf_AdministratorMenu.pack();
-            jf_AdministratorMenu.setLocationRelativeTo(this);
-            jf_AdministratorMenu.setVisible(true);
-            jText_UsernameLogIn.setText("");
-            jPassword_PasswordLogIn.setText("");
-            SQLQuery = "SELECT * FROM empleado";
-            try {
-
-                ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
-                DefaultTableModel Modelo = new DefaultTableModel();
-                Modelo.addColumn("Employee ID");
-                Modelo.addColumn("Phone Number");
-                Modelo.addColumn("Employee Name");
-                Modelo.addColumn("Employee Type");
-                while (QueryResult.next()) {
-                    EmployeesResutl[0] = QueryResult.getString(1);
-                    EmployeesResutl[1] = QueryResult.getString(2);
-                    EmployeesResutl[2] = QueryResult.getString(3);
-                    EmployeesResutl[3] = QueryResult.getString(4);
-                    Modelo.addRow(EmployeesResutl);
+                    ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
+                    DefaultTableModel Modelo = new DefaultTableModel();
+                    Modelo.addColumn("Employee ID");
+                    Modelo.addColumn("Phone Number");
+                    Modelo.addColumn("Employee Name");
+                    Modelo.addColumn("Employee Type");
+                    while (QueryResult.next()) {
+                        EmployeesResutl[0] = QueryResult.getString(1);
+                        EmployeesResutl[1] = QueryResult.getString(2);
+                        EmployeesResutl[2] = QueryResult.getString(3);
+                        EmployeesResutl[3] = QueryResult.getString(4);
+                        Modelo.addRow(EmployeesResutl);
+                    }
+                    jTable_Employees.setModel(Modelo);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
                 }
-                jTable_Employees.setModel(Modelo);
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-            }
 
-        } else {
-            JOptionPane.showMessageDialog(this, "ERROR");
-        }
+            } else {
+                JOptionPane.showMessageDialog(this, "ERROR");
+            }
 
     }//GEN-LAST:event_jButton_LogInActionPerformed
 
@@ -2480,7 +2478,7 @@ public class Front extends javax.swing.JFrame {
                 jText_AppointmentClientID.setText(QueryResult.getString(1));
                 jText_AppointmentClientName.setText(QueryResult.getString(4));
                 jText_AppointmentClientPhoneNumber.setText(QueryResult.getString(7));
-                To=QueryResult.getString(6);//Assigning the Email destination
+                To = QueryResult.getString(6);//Assigning the Email destination
             }
             //Looking for his automobiles
             DefaultTableModel Modelo = new DefaultTableModel();
@@ -2721,18 +2719,18 @@ public class Front extends javax.swing.JFrame {
     private void jButton_AssignMechanicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AssignMechanicActionPerformed
         String AssignMechanics = "";
         try {
-            SQLQuery = "SELECT IDMecanicos FROM asesor WHERE IDAsesor='" +jText_AssesorID.getText() + "'";
+            SQLQuery = "SELECT IDMecanicos FROM asesor WHERE IDAsesor='" + jText_AssesorID.getText() + "'";
             ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
             if (QueryResult.next()) {
                 AssignMechanics = QueryResult.getString(1);
             }
             SQLQuery = "UPDATE asesor SET IDMecanicos=? WHERE IDAsesor='" + jText_AssesorID.getText() + "'";
             PreparedStatement PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
-            PreparedQuery.setString(1, AssignMechanics+jCombo_AssignMechanics.getSelectedItem().toString()+ ",");
+            PreparedQuery.setString(1, AssignMechanics + jCombo_AssignMechanics.getSelectedItem().toString() + ",");
             PreparedQuery.executeUpdate();
-            SQLQuery = "UPDATE mecanico SET IDAsesorAsignado=? WHERE IDMecanico='"+jCombo_AssignMechanics.getSelectedItem().toString()+ "'";
+            SQLQuery = "UPDATE mecanico SET IDAsesorAsignado=? WHERE IDMecanico='" + jCombo_AssignMechanics.getSelectedItem().toString() + "'";
             PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
-            PreparedQuery.setString(1,jText_AssesorID.getText());
+            PreparedQuery.setString(1, jText_AssesorID.getText());
             PreparedQuery.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
@@ -3047,10 +3045,10 @@ public class Front extends javax.swing.JFrame {
 
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(Username, PassWord);
-                    }
-                });
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(Username, PassWord);
+            }
+        });
 
         try {
 
@@ -3068,7 +3066,7 @@ public class Front extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }
-    
+
     boolean CheckExistingPrimaryKey(String TableName, String PrimaryKey, String ComparableKey) throws SQLException {
         SQLQuery = "SELECT " + PrimaryKey + " FROM " + TableName + "";
         boolean Result = false;
@@ -3080,6 +3078,7 @@ public class Front extends javax.swing.JFrame {
         }
         return Result;
     }
+
     public ArrayList<Client> createClientQueue() {
         /*
         Recupera clientIDS.
@@ -3129,7 +3128,7 @@ public class Front extends javax.swing.JFrame {
         }
         return count;
     }
-    
+
     String[] DivideTokens(String Tokens) {
         Scanner SC = new Scanner(Tokens);
         SC.useDelimiter(",");
@@ -3170,7 +3169,7 @@ public class Front extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "the following error occurred: " + ex.getMessage());
         }
         return result;
     }

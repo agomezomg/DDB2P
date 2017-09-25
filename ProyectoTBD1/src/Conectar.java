@@ -19,7 +19,6 @@ public class Conectar {
             ds.setDatabaseName("proyecto");
             ds.setUser("root");
             Scanner sc = new Scanner(System.in);
-            System.out.println("PASSWORD PROMPT: ");
             String pass = "empty";
             ds.setPassword(pass);
             conectar = con;
