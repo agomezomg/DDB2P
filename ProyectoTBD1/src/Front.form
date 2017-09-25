@@ -94,8 +94,8 @@
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="1" attributes="0">
                                                               <Component id="jText_ClientName" min="-2" pref="209" max="-2" attributes="0"/>
-                                                              <Component id="jPassword_Client" min="-2" pref="209" max="-2" attributes="0"/>
                                                               <Component id="jText_ClientID" min="-2" pref="209" max="-2" attributes="0"/>
+                                                              <Component id="jText_ClientPassword" alignment="0" min="-2" pref="209" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                       <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -139,7 +139,7 @@
                                       <Component id="jSeparator1" min="-2" pref="683" max="-2" attributes="0"/>
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="117" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -158,7 +158,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jPassword_Client" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jText_ClientPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -218,8 +218,6 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Password:"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JPasswordField" name="jPassword_Client">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel18">
                   <Properties>
@@ -416,6 +414,8 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator1">
+                </Component>
+                <Component class="javax.swing.JTextField" name="jText_ClientPassword">
                 </Component>
               </SubComponents>
             </Container>

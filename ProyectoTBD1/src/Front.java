@@ -6,9 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +56,6 @@ public class Front extends javax.swing.JFrame {
         jTabbedPane_Appointment = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jPassword_Client = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jText_ClientID = new javax.swing.JTextField();
@@ -69,6 +76,7 @@ public class Front extends javax.swing.JFrame {
         jButton_SearchClientID = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jText_ClientPassword = new javax.swing.JTextField();
         prueba = new javax.swing.JPanel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
@@ -364,8 +372,8 @@ public class Front extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(jText_ClientName, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jPassword_Client, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jText_ClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(jText_ClientID, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jText_ClientPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addComponent(jLabel18)))
                                     .addGroup(jPanel5Layout.createSequentialGroup()
                                         .addGap(61, 61, 61)
@@ -393,7 +401,7 @@ public class Front extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(0, 25, Short.MAX_VALUE))))
+                        .addGap(0, 117, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +415,7 @@ public class Front extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
-                            .addComponent(jPassword_Client, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jText_ClientPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jText_ClientID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -944,7 +952,7 @@ public class Front extends javax.swing.JFrame {
         );
         jf_AdministratorMenuLayout.setVerticalGroup(
             jf_AdministratorMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane_Appointment, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+            .addComponent(jTabbedPane_Appointment, javax.swing.GroupLayout.PREFERRED_SIZE, 544, Short.MAX_VALUE)
         );
 
         jMenuItem_View.setText("Quick View");
@@ -1906,7 +1914,6 @@ public class Front extends javax.swing.JFrame {
         if (this.verificar(userName, PassWord)) {
             String tipo = "";
             if (UserType.equals("Assesor")) {
-                System.out.println("HOLA");
                 SQLQuery = "SELECT * FROM empleado WHERE IDEmpleado='" + IDtemp + "'";
                 ResultSet QueryResult;
                 try {
@@ -2419,13 +2426,13 @@ public class Front extends javax.swing.JFrame {
                 PreparedQuery.setString(2, jText_ClientPhoneNumber.getText());
                 PreparedQuery.setString(3, jText_ClientName.getText());
                 PreparedQuery.setString(4, jText_ClientEmail.getText());
-                PreparedQuery.setString(5, jPassword_Client.getPassword().toString());
+                PreparedQuery.setString(5, jText_ClientPassword.getText());
                 PreparedQuery.setString(6, jText_ClientAdress.getText());
                 PreparedQuery.executeUpdate();
                 //Create User Stored Procedure
                 PreparedQuery = ConectionQuery.prepareStatement("{call proyecto.createUser(?,?,?,?)}");
                 PreparedQuery.setString(1, jText_ClientName.getText());
-                PreparedQuery.setString(2, jPassword_Client.getSelectedText());
+                PreparedQuery.setString(2, jText_ClientPassword.getText());
                 PreparedQuery.setString(3, "Client");
                 PreparedQuery.setString(4, jText_ClientID.getText());
                 PreparedQuery.executeQuery();
@@ -2473,6 +2480,7 @@ public class Front extends javax.swing.JFrame {
                 jText_AppointmentClientID.setText(QueryResult.getString(1));
                 jText_AppointmentClientName.setText(QueryResult.getString(4));
                 jText_AppointmentClientPhoneNumber.setText(QueryResult.getString(7));
+                To=QueryResult.getString(6);//Assigning the Email destination
             }
             //Looking for his automobiles
             DefaultTableModel Modelo = new DefaultTableModel();
@@ -2530,6 +2538,8 @@ public class Front extends javax.swing.JFrame {
                 }
                 PreparedQuery.executeUpdate();
             }
+            //Sendind EMail
+            SendMail();
             //Assign Appointments to Mechanics
             SQLQuery = "UPDATE mecanico SET IDCita=? WHERE IDAsesorAsignado='" + jText_AppointmentAssesorID.getText() + "'";
             PreparedStatement PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
@@ -2613,9 +2623,9 @@ public class Front extends javax.swing.JFrame {
         try {
             SQLQuery = "INSERT INTO automovil (Placa,Modelo,Motor,IDCliente) VALUES(?,?,?,?)  ";
             PreparedStatement PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
-            PreparedQuery.setString(1, jText_ClientViewPlate.getText());
-            PreparedQuery.setString(2, jText_ClientViewModel.getText());
-            PreparedQuery.setString(3, jText_ClientViewMotor.getText());
+            PreparedQuery.setString(1, jText_ClientViewPlate1.getText());
+            PreparedQuery.setString(2, jText_ClientViewModel1.getText());
+            PreparedQuery.setString(3, jText_ClientViewMotor1.getText());
             PreparedQuery.setString(4, jText_ClientViewID1.getText());
             PreparedQuery.executeUpdate();
         } catch (SQLException ex) {
@@ -2711,18 +2721,18 @@ public class Front extends javax.swing.JFrame {
     private void jButton_AssignMechanicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AssignMechanicActionPerformed
         String AssignMechanics = "";
         try {
-            SQLQuery = "SELECT IDMecanicos FROM asesor WHERE IDAsesor='" + jText_AssesorID.getText() + "'";
+            SQLQuery = "SELECT IDMecanicos FROM asesor WHERE IDAsesor='" +jText_AssesorID.getText() + "'";
             ResultSet QueryResult = QueryState.executeQuery(SQLQuery);
             if (QueryResult.next()) {
                 AssignMechanics = QueryResult.getString(1);
             }
             SQLQuery = "UPDATE asesor SET IDMecanicos=? WHERE IDAsesor='" + jText_AssesorID.getText() + "'";
             PreparedStatement PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
-            PreparedQuery.setString(1, AssignMechanics + LookID(jCombo_AssignMechanics.getSelectedItem().toString()) + ",");
+            PreparedQuery.setString(1, AssignMechanics+jCombo_AssignMechanics.getSelectedItem().toString()+ ",");
             PreparedQuery.executeUpdate();
-            SQLQuery = "UPDATE mecanico SET IDAsesorAsignado=? WHERE IDMecanico='" + LookID(jCombo_AssignMechanics.getSelectedItem().toString()) + "'";
+            SQLQuery = "UPDATE mecanico SET IDAsesorAsignado=? WHERE IDMecanico='"+jCombo_AssignMechanics.getSelectedItem().toString()+ "'";
             PreparedQuery = ConectionQuery.prepareStatement(SQLQuery);
-            PreparedQuery.setString(1, jText_AssesorID.getText());
+            PreparedQuery.setString(1,jText_AssesorID.getText());
             PreparedQuery.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Front.class.getName()).log(Level.SEVERE, null, ex);
@@ -2930,7 +2940,6 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPasswordField jPassword_Client;
     private javax.swing.JPasswordField jPassword_PasswordLogIn;
     private javax.swing.JPopupMenu jPopupMenuAssesor;
     private javax.swing.JPopupMenu jPopupMenuClients;
@@ -2981,6 +2990,7 @@ public class Front extends javax.swing.JFrame {
     private javax.swing.JTextField jText_ClientEmail;
     private javax.swing.JTextField jText_ClientID;
     private javax.swing.JTextField jText_ClientName;
+    private javax.swing.JTextField jText_ClientPassword;
     private javax.swing.JTextField jText_ClientPhoneNumber;
     private javax.swing.JTextField jText_ClientSearchID;
     private javax.swing.JTextField jText_ClientViewAdress;
@@ -3022,7 +3032,43 @@ public class Front extends javax.swing.JFrame {
     String[] EmployeesResutl = new String[5];
     String IDtemp = "";
     String tipoCuenta;
+    static String Username = "didiermurillo45@gmail.com";
+    static String PassWord = "didiermurillo";
+    static String Mensage = "Thanks for using our services!";
+    static String Subject = "Requested Appointment";
+    String To = "";
 
+    public void SendMail() {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(Username, PassWord);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(Username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(To));
+            message.setSubject(Subject);
+            message.setText(Mensage);
+
+            Transport.send(message);
+            JOptionPane.showMessageDialog(this, "Su mensaje ha sido enviado");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
     boolean CheckExistingPrimaryKey(String TableName, String PrimaryKey, String ComparableKey) throws SQLException {
         SQLQuery = "SELECT " + PrimaryKey + " FROM " + TableName + "";
         boolean Result = false;
