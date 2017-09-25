@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author lana
  */
-public class Assesor extends MechanicAssesor {
+public class Assessor extends MechanicAssessor {
     
     private final ArrayList<Mechanic> assignedGroup;
     
-    public Assesor(String amName, String amID, int amCompanyPhone) {
+    public Assessor(String amName, String amID, int amCompanyPhone) {
         super(amName, amID, amCompanyPhone);
         assignedGroup = new ArrayList<>();
     }

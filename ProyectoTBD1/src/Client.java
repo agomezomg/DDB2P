@@ -19,7 +19,7 @@ public class Client extends User {
     private String clientEmail;
     private ArrayList<Automobile> registeredCars;
     private String appointmentState;
-    private Assesor mainAssesor;
+    private Assessor mainAssesor;
     private int appointmentCount;
 
     public Client(String clientID, int appointmentCount, String username, String password) {
@@ -28,7 +28,7 @@ public class Client extends User {
         this.appointmentCount = appointmentCount;
     }
 
-    public Client(String clientID, String clientName, int clientPhoneNumber, String clientAddress, String clientEmail, String citaEstado, Assesor mainAssesor, String username, String password) {
+    public Client(String clientID, String clientName, int clientPhoneNumber, String clientAddress, String clientEmail, String citaEstado, Assessor mainAssesor, String username, String password) {
         super(username, password);
         this.clientID = clientID;
         this.clientName = clientName;
@@ -47,11 +47,11 @@ public class Client extends User {
         this.appointmentState = appointmentState;
     }
 
-    public Assesor getMainAssesor() {
+    public Assessor getMainAssesor() {
         return mainAssesor;
     }
 
-    public void setMainAssesor(Assesor mainAssesor) {
+    public void setMainAssesor(Assessor mainAssesor) {
         this.mainAssesor = mainAssesor;
     }
 

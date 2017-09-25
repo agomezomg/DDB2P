@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author lana
  */
-public class Mechanic extends MechanicAssesor {
+public class Mechanic extends MechanicAssessor {
     private final ArrayList<Appointment> registeredDates;
     
     public Mechanic(String amName, String amID, int amCompanyPhone) {
