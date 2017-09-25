@@ -10,7 +10,6 @@ public class Conectar {
     Connection conectar = null;
 
     public Connection Conexion() {
-        Connection conectar = null;
 
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/phpmyadmin", "root", "");
